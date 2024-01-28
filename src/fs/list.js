@@ -1,7 +1,8 @@
-import { readdir, stat } from 'node:fs/promises'
+import { readdir, stat } from 'fs/promises'
+import path from "path";
 
 const list = async () => {
-    const folder = '../fs/files';
+    const folder = path.resolve(path.dirname(new URL(import.meta.url).pathname), './files');
 
     try {
         await stat(folder)

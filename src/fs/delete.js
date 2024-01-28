@@ -1,8 +1,9 @@
-import { unlink, stat } from 'node:fs/promises'
+import { unlink, stat } from 'fs/promises'
+import path from "path";
 
 const remove = async () => {
     try {
-        const fileToRemove = '../fs/files/fileToRemove.txt';
+        const fileToRemove = path.resolve(path.dirname(new URL(import.meta.url).pathname), './files/fileToRemove.txt');
 
         await stat(fileToRemove);
         await unlink(fileToRemove)

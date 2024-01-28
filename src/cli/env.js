@@ -1,6 +1,3 @@
-process.env.RSS_name1 = 'value1'
-process.env.RSS_name2 = 'value2'
-
 const parseEnv = () => {
     for (const env in process.env) {
         if (env.startsWith('RSS_')){

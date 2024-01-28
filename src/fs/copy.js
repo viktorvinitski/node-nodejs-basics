@@ -1,10 +1,10 @@
 import * as path from 'path';
-import { access, mkdir, readdir, copyFile } from 'node:fs/promises'
+import { access, mkdir, readdir, copyFile } from 'fs/promises'
 
 const copy = async () => {
     try {
-        const sourceDirectory = '../fs/files';
-        const destinationDirectory = '../fs/files_copy';
+        const sourceDirectory = path.resolve(path.dirname(new URL(import.meta.url).pathname), './files');
+        const destinationDirectory = path.resolve(path.dirname(new URL(import.meta.url).pathname), './files_copy');
 
         try {
             await access(sourceDirectory)
