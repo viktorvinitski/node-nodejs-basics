@@ -1,9 +1,12 @@
 import os from 'os'
 import { Worker } from 'worker_threads'
 import path from "path";
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const performCalculations = async () => {
-    const workerPath = path.resolve(path.dirname(new URL(import.meta.url).pathname), './worker.js');
+    const workerPath = path.join(__dirname + '/worker.js');
     const numCPUs = os.cpus().length;
     const results = [];
 

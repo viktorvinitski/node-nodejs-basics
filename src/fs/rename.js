@@ -1,10 +1,13 @@
 import { access, rename as fsRename } from 'fs/promises'
 import path from "path";
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const rename = async () => {
     try {
-        const fileToRename = path.resolve(path.dirname(new URL(import.meta.url).pathname), './files/wrongFilename.txt');
-        const newFileName = path.resolve(path.dirname(new URL(import.meta.url).pathname), './files/properFilename.md');
+        const fileToRename = path.join(__dirname + '/files/wrongFilename.txt');
+        const newFileName = path.join(__dirname + '/files/properFilename.md');
         await access(fileToRename)
 
         try {

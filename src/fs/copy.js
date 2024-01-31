@@ -1,10 +1,13 @@
-import * as path from 'path';
 import { access, mkdir, readdir, copyFile } from 'fs/promises'
+import path from "path";
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const copy = async () => {
     try {
-        const sourceDirectory = path.resolve(path.dirname(new URL(import.meta.url).pathname), './files');
-        const destinationDirectory = path.resolve(path.dirname(new URL(import.meta.url).pathname), './files_copy');
+        const sourceDirectory = path.join(__dirname + '/files');
+        const destinationDirectory = path.join(__dirname + '/files_copy');
 
         try {
             await access(sourceDirectory)
@@ -30,5 +33,6 @@ const copy = async () => {
         })
     } catch {}
 };
+
 
 await copy();

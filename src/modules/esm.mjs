@@ -3,10 +3,13 @@ import { release, version } from 'os'
 import { createServer  } from 'http'
 import './files/c.js';
 import { readFile } from 'fs/promises'
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const importFile = async (filePath) => {
-    const dirname = path.dirname(new URL(import.meta.url).pathname);
-    const fileContent = await readFile(path.resolve(dirname, filePath), 'utf-8');
+    const dirname = path.join(__dirname + filePath);
+    const fileContent = await readFile(dirname, 'utf-8');
     return JSON.parse(fileContent);
 };
 
@@ -15,8 +18,8 @@ const importFile = async (filePath) => {
 
     let unknownObject;
 
-    const objectAPath = './files/a.json';
-    const objectBPath = './files/b.json';
+    const objectAPath = '/files/a.json';
+    const objectBPath = '/files/b.json';
 
     unknownObject = random > 0.5
         ? await importFile(objectAPath)

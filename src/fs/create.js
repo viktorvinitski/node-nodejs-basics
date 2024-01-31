@@ -1,9 +1,12 @@
 import { writeFile, access } from 'fs/promises'
 import path from "path";
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const create = async () => {
     const newDocumentText = 'I am fresh and young'
-    const newFilePath = path.resolve(path.dirname(new URL(import.meta.url).pathname), './files/fresh.txt');
+    const newFilePath = path.join(__dirname + '/files/fresh.txt');
     try {
         await access(newFilePath);
         console.error(`FS operation failed`);
